@@ -1,5 +1,5 @@
 from domain.plan import Plan
-from domain.value_objects import MonetaryValue, Currency
+from src.domain.value_objects import MonetaryValue, Currency
 
 
 def test_create_plan_with_name_and_price():

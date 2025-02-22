@@ -1,0 +1,2 @@
+class DuplicatePlanError(Exception):
+    pass

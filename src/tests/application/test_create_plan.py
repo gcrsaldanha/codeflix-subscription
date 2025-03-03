@@ -16,7 +16,7 @@ class TestCreatePlan:
 
         with pytest.raises(DuplicatePlanError):
             use_case.execute(input=CreatePlanInput(
-                name="Basi",
+                name="Basic",
                 price=MonetaryValue(amount=100, currency=Currency.BRL),
             ))
 

@@ -1,4 +1,4 @@
-from domain.user_account import UserAccount, Address
+from src.domain.user_account import UserAccount, Address
 
 
 def test_create_valid_user_account():

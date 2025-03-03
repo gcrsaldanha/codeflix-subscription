@@ -3,11 +3,11 @@ from uuid import uuid4
 
 from dateutil.relativedelta import relativedelta
 
-from domain.subscription import Subscription
+from src.domain.subscription import Subscription
 
 
 class TestCreateRegularSubscription:
-    def test_create_regular_subscription_with_30_days_duration():
+    def test_create_regular_subscription_with_30_days_duration(self):
         user_id = uuid4()
         plan_id = uuid4()
         subscription = Subscription.create_regular(user_id, plan_id)
@@ -20,7 +20,7 @@ class TestCreateRegularSubscription:
 
 
 class TestCreateTrialSubscription:
-    def test_create_trial_subscription_with_7_days_trial():
+    def test_create_trial_subscription_with_7_days_trial(self):
         user_id = uuid4()
         plan_id = uuid4()
         subscription = Subscription.create_trial(user_id, plan_id)
@@ -33,21 +33,21 @@ class TestCreateTrialSubscription:
 
 
 class TestIsExpired:
-    def test_end_date_before_today_then_expired_subscription():
+    def test_end_date_before_today_then_expired_subscription(self):
         user_id = uuid4()
         plan_id = uuid4()
         subscription = Subscription.create_regular(user_id, plan_id)
         subscription.end_date = datetime.today() - relativedelta(days=1)
         assert subscription.is_expired is True
 
-    def test_end_date_after_today_then_not_expired_subscription():
+    def test_end_date_after_today_then_not_expired_subscription(self):
         user_id = uuid4()
         plan_id = uuid4()
         subscription = Subscription.create_regular(user_id, plan_id)
         subscription.end_date = datetime.today() + relativedelta(days=1)
         assert subscription.is_expired is False
 
-    def test_end_date_on_today_then_not_expired_subscription():
+    def test_end_date_on_today_then_not_expired_subscription(self):
         user_id = uuid4()
         plan_id = uuid4()
         subscription = Subscription.create_regular(user_id, plan_id)

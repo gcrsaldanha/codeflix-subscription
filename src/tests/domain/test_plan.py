@@ -1,4 +1,4 @@
-from domain.plan import Plan
+from src.domain.plan import Plan
 from src.domain.value_objects import MonetaryValue, Currency
 
 

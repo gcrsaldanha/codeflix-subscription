@@ -1,3 +1,5 @@
+from uuid import UUID
+
 from src.domain.plan import Plan
 
 
@@ -10,6 +12,12 @@ class InMemoryPlanRepository:
             if plan.name == name:
                 return plan
         return None
+
+    def find_by_id(self, plan_id: UUID) -> Plan | None:
+        for plan in self.plans:
+            if plan.id == plan_id:
+                return plan
+        return
 
     def save(self, plan: Plan) -> None:
         if self.find_by_name(plan.name):

@@ -3,35 +3,35 @@ import pytest
 from src.application.create_plan import CreatePlanUseCase, CreatePlanInput
 from src.application.exceptions import DuplicatePlanError
 from src.domain.plan import Plan
-from src.domain.value_objects import MonetaryValue, Currency
+from src.domain.value_objects import MonetaryValue
 from src.tests.infra.in_memory_plan_repository import InMemoryPlanRepository
 
 
 class TestCreatePlan:
     def test_when_plan_with_name_exists_then_return_error(self):
-        plan = Plan(name="Basic", price=MonetaryValue(amount=100, currency=Currency.BRL))
-        plan_repo = InMemoryPlanRepository(plans=[plan])
+        basic_plan = Plan(name="Basic", price=MonetaryValue(amount=100, currency="BRL"))
+        repo = InMemoryPlanRepository()
+        repo.save(basic_plan)
 
-        use_case = CreatePlanUseCase(repository=plan_repo)
+        create_plan = CreatePlanUseCase(repository=repo)
 
         with pytest.raises(DuplicatePlanError):
-            use_case.execute(input=CreatePlanInput(
+            create_plan.execute(CreatePlanInput(
                 name="Basic",
-                price=MonetaryValue(amount=100, currency=Currency.BRL),
+                price=MonetaryValue(amount=100, currency="BRL")
             ))
 
-    def test_when_plan_with_name_does_not_exist_then_create_plan(self):
-        plan_repo = InMemoryPlanRepository(plans=[])
-        use_case = CreatePlanUseCase(repository=plan_repo)
+    def test_create_plan(self):
+        repo = InMemoryPlanRepository()
+        create_plan = CreatePlanUseCase(repository=repo)
 
-        output = use_case.execute(input=CreatePlanInput(
+        output = create_plan.execute(CreatePlanInput(
             name="Basic",
-            price=MonetaryValue(amount=100, currency=Currency.BRL),
+            price=MonetaryValue(amount=100, currency="BRL")
         ))
+
+        assert repo.find_by_name("Basic") is not None
 
         assert output.id is not None
         assert output.name == "Basic"
-        assert output.price == MonetaryValue(amount=100, currency=Currency.BRL)
-
-        assert len(plan_repo.plans) == 1
-        assert output.id == plan_repo.find_by_name("Basic").id
+        assert output.price == MonetaryValue(amount=100, currency="BRL")

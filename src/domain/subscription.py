@@ -85,3 +85,7 @@ class Subscription(Entity):
     @property
     def is_canceled(self):
         return self.status == SubscriptionStatus.CANCELLED
+
+    @property
+    def is_active(self):
+        return self.status == SubscriptionStatus.ACTIVE

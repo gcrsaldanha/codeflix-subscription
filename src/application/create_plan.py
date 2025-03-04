@@ -19,16 +19,16 @@ class CreatePlanOutput(BaseModel):
 
 
 class CreatePlanUseCase:
-    def __init__(self, repository) -> None:
-        self._repo = repository
+    def __init__(self, repository):
+        self.repository = repository
 
     def execute(self, input: CreatePlanInput) -> CreatePlanOutput:
-        existing = self._repo.find_by_name(input.name)
-        if existing:
-            raise DuplicatePlanError("Plan with this name already exists")
+        existing_plan = self.repository.find_by_name(input.name)
+        if existing_plan:
+            raise DuplicatePlanError()
 
         plan = Plan(name=input.name, price=input.price)
-        self._repo.save(plan)
+        self.repository.save(plan)
 
         return CreatePlanOutput(
             id=plan.id,

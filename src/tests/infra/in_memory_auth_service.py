@@ -1,4 +1,7 @@
-class InMemoryAuthService:
+from src.infra.auth_service import AuthService
+
+
+class InMemoryAuthService(AuthService):
     def __init__(self, users: list[str] | None = None):
         self.users = users or []
 

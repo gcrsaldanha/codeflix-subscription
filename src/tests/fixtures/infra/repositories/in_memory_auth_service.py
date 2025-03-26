@@ -1,4 +1,4 @@
-from src.infra.auth_service import AuthService
+from src.infra.auth import AuthService
 
 
 class InMemoryAuthService(AuthService):

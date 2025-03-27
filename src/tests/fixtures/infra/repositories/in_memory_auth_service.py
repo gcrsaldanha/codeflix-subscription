@@ -11,6 +11,6 @@ class InMemoryAuthService(AuthService):
                 return user
         return None
 
-    def create_user(self, email: str, _: str) -> str:
+    def create_user(self, email: str, password: str) -> str:
         self.users.append(email)
         return "abcdef"

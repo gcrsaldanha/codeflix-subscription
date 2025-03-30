@@ -1,15 +1,15 @@
-# Desafio 7: Cancel Subscription API
+# Desafio: Cancel Subscription API
 
 Neste desafio, você deve implementar a API de cancelamento de assinaturas seguindo o padrão utilizado nas demais APIs do
 projeto.
 
-## Passo a Passo
+## Requisitos
 
-1. API
-    - Crie um endpoint para o cancelamento (ex: \`DELETE /subscriptions/{subscription_id}\`).
+1. Seguir o contrato da API:
+```
+DELETE /subscriptions/{subscription_id}/
+```
 
-2. Dependências
-    - Configure a injeção de dependências para o use case de cancelamento no endpoint.
-
-3. Teste E2E
-    - Crie testes end-to-end em um arquivo de teste (ex: `src/tests/e2e/test_cancel_subscription.py`).
+2. Implementar testes end-to-end para o cancelamento de assinaturas para os casos:
+   - Cancelar assinatura ativa: Response: 200 OK
+   - Cancelar assinatura inexistente: Response: 404 NOT_FOUND

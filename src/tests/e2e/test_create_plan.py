@@ -1,7 +1,5 @@
 from fastapi.testclient import TestClient
 
-from src.tests.fixtures import client
-
 
 def test_create_plan_success(client: TestClient) -> None:
     """Test successfully creating a plan"""

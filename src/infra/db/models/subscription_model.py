@@ -18,7 +18,6 @@ class SubscriptionModel(SQLModel, table=True):
     status: str = Field(default=SubscriptionStatus.ACTIVE)
     created_at: datetime = Field(default_factory=datetime.now)
     updated_at: datetime = Field(default_factory=datetime.now)
-    is_active: bool = Field(default=True)
 
     @classmethod
     def from_entity(cls, subscription: Subscription) -> "SubscriptionModel":
@@ -32,7 +31,6 @@ class SubscriptionModel(SQLModel, table=True):
             is_trial=subscription.is_trial,
             created_at=subscription.created_at,
             updated_at=subscription.updated_at,
-            is_active=subscription.is_active,
         )
 
     def to_entity(self) -> Subscription:
@@ -46,5 +44,4 @@ class SubscriptionModel(SQLModel, table=True):
             is_trial=self.is_trial,
             created_at=self.created_at,
             updated_at=self.updated_at,
-            is_active=self.is_active,
         )

@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, HTTPException
 
 from src.application.exceptions import SubscriptionConflictError, UserNotFoundError, PlanNotFoundError
@@ -19,4 +21,5 @@ def subscribe_to_plan(
     except SubscriptionConflictError as e:
         raise HTTPException(status_code=409, detail=str(e))  # Conflict
     except Exception:
+        logging.error("Unexpected error while susbcribing to plan", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal Server Error")

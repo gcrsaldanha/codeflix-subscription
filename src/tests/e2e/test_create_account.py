@@ -1,8 +1,6 @@
 import pytest
 from fastapi.testclient import TestClient
 
-from src.tests.fixtures import client
-
 
 @pytest.fixture
 def valid_payload() -> dict:

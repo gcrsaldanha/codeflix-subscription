@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, HTTPException
 
 from src.application.create_plan import CreatePlanInput, CreatePlanOutput
@@ -17,4 +19,5 @@ def create_plan(
     except DuplicatePlanError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception:
+        logging.error("Unexpected error while creating plan", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal Server Error")

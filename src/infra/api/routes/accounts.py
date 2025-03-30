@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, HTTPException
 
 from src.application.create_user_account import (
@@ -20,4 +22,5 @@ def create_user_account(
     except UserAlreadyExistsError as e:
         raise HTTPException(status_code=400, detail=str(e))
     except Exception:
+        logging.error("Unexpected error while creating user account", exc_info=True)
         raise HTTPException(status_code=500, detail="Internal Server Error")

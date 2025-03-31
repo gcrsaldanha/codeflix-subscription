@@ -7,7 +7,22 @@ services:
       - .:/app
     ports:
       - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/subscription_service
+    depends_on:
+      - db
     command: uvicorn src.infra.api.fastapi:app --host 0.0.0.0 --reload --port 8000
+
+  db:
+    image: postgres:14
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=subscription_service
+    ports:
+      - "5432:5432"
 
   test:
     build:
@@ -18,3 +33,7 @@ services:
     command: pytest -v
     profiles:
       - test
+
+
+volumes:
+  postgres_data:

@@ -16,7 +16,7 @@ class TestCreateRegularSubscription:
         assert subscription.start_date is not None
         assert (subscription.end_date - subscription.start_date).days == 30
         assert subscription.is_trial is False
-        assert subscription.is_active is True
+        assert subscription.is_active
 
 
 class TestCreateTrialSubscription:
@@ -29,7 +29,7 @@ class TestCreateTrialSubscription:
         assert subscription.start_date is not None
         assert (subscription.end_date - subscription.start_date).days == 7
         assert subscription.is_trial is True
-        assert subscription.is_active is True
+        assert subscription.is_active
 
 
 class TestIsExpired:

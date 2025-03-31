@@ -170,4 +170,5 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
+./subscription_service.db
 subscription_service.db

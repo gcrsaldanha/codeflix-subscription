@@ -1,0 +1,25 @@
+# Core framework dependencies
+fastapi[standard]==0.115.4
+sqlalchemy==2.0.40
+sqlmodel==0.0.24
+pydantic==2.11.1
+python-dateutil==2.9.0
+
+# Database drivers
+psycopg2-binary==2.9.10
+
+# Authentication
+python-keycloak==5.3.1
+
+# Settings management
+python-dotenv==1.1.0
+pydantic-settings==2.8.1
+
+# Testing
+pytest==8.3.5
+httpx==0.28.1
+
+# Development tools
+black==25.1.0
+ipdb==0.13.13
+ipython==9.0.2

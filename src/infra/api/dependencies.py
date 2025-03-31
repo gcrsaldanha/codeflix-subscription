@@ -11,8 +11,7 @@ from src.domain.repositories import (
     UserAccountRepository,
     SubscriptionRepository,
 )
-from src.infra.auth import AuthService
-from src.infra.auth.in_memory_auth_service import InMemoryAuthService
+from src.infra.auth import AuthService, KeycloakAuthService
 from src.infra.db import (
     get_session,
     SQLModelPlanRepository,
@@ -56,7 +55,7 @@ SubscriptionRepositoryDep = Annotated[
 
 # External dependencies
 def get_auth_service() -> AuthService:
-    return InMemoryAuthService()  # TODO: replace by KeycloakAuthService
+    return KeycloakAuthService()
 
 
 def get_notification_service() -> NotificationService:
